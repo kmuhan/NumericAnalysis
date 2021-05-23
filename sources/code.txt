@@ -1,0 +1,171 @@
+#longevity casting - min
+    longevity = mammal['longevity']
+    longevity.replace(' ', '')
+    flag = False
+    for char in longevity :
+        if char.isdigit() :
+            flag = True
+    if flag :
+        if longevity.find('months') != -1 :
+            longevity = str(float(re.findall('\d*\.?\d+', longevity)[0]) * (1/12))
+        elif longevity.find('years') != -1 or longevity.find('yrs') != -1 :
+            longevity = re.findall('\d*\.?\d+', longevity)[0]
+        mammal['longevity'] = longevity
+    else :
+        mammals.remove(mammal)
+        continue
+
+ #longevity casting - max
+    longevity = mammal['longevity']
+    longevity.replace(' ', '')
+    flag = False
+    for char in longevity :
+        if char.isdigit() :
+            flag = True
+    if flag :
+        if longevity.find('months') != -1 :
+            if len(re.findall('\d*\.?\d+', longevity)) > 1 :
+                longevity = str(float(re.findall('\d*\.?\d+', longevity)[1]) * (1/12))
+            else :
+                longevity = str(float(re.findall('\d*\.?\d+', longevity)[0]) * (1 / 12))
+        elif longevity.find('years') != -1 or longevity.find('yrs') != -1 :
+            if len(re.findall('\d*\.?\d+', longevity)) > 1 :
+                longevity = re.findall('\d*\.?\d+', longevity)[1]
+            else :
+                longevity = re.findall('\d*\.?\d+', longevity)[0]
+        mammal['longevity'] = longevity
+    else :
+        mammals.remove(mammal)
+        continue
+
+ #longevity casting - avg
+    longevity = mammal['longevity']
+    longevity.replace(' ', '')
+    flag = False
+    for char in longevity :
+        if char.isdigit() :
+            flag = True
+    if flag :
+        if longevity.find('months') != -1 :
+            if len(re.findall('\d*\.?\d+', longevity)) > 1 :
+                longevity = str((float(re.findall('\d*\.?\d+', longevity)[1]) + float(re.findall('\d*\.?\d+', longevity)[0])) / 24)
+            else :
+                longevity = str(float(re.findall('\d*\.?\d+', longevity)[0]) * (1 / 12))
+        elif longevity.find('years') != -1 or longevity.find('yrs') != -1 :
+            if len(re.findall('\d*\.?\d+', longevity)) > 1 :
+                longevity = str((float(re.findall('\d*\.?\d+', longevity)[1]) + float(re.findall('\d*\.?\d+', longevity)[0])) / 2)
+            else :
+                longevity = re.findall('\d*\.?\d+', longevity)[0]
+        mammal['longevity'] = longevity
+    else :
+        mammals.remove(mammal)
+        continue
+
+    # weight casting - min
+    weight = mammal['weight']
+    weight = weight.replace(',', '')
+    weight = weight.replace(' ', '')
+    flag = False
+    for char in weight :
+        if char.isdigit() :
+            flag = True
+    if flag :
+        if weight.find('(') != -1 :
+            weight = weight[0:weight.index('(')]
+        if weight.find('lbs') != -1 or  weight.find('Lbs') or weight.find('pound'):
+            weight = str(float(re.findall('\d*\.?\d+', weight)[0]) * 0.453592)
+        elif weight.find('kg') != -1 :
+            weight = re.findall('\d*\.?\d+', weight)[0]
+        elif weight.find('g') != -1 :
+            weight = str(float(re.findall('\d*\.?\d+', weight)[0]) * 0.001)
+        elif weight.find('ton') != -1 :
+            weight = str(float(re.findall('\d*\.?\d+', weight)[0]) * 1000)
+        elif weight.find('oz') != -1 or weight.find('ounce') :
+            weight = str(float(re.findall('\d*\.?\d+', weight)[0]) * 0.0283495)
+        mammal['weight']= weight
+    else :
+        mammals.remove(mammal)
+        continue
+
+# weight casting - max
+    weight = mammal['weight']
+    weight = weight.replace(',', '')
+    weight = weight.replace(' ', '')
+    flag = False
+    for char in weight :
+        if char.isdigit() :
+            flag = True
+    if flag :
+        if weight.find('(') != -1 :
+            weight = weight[0:weight.index('(')]
+        if weight.find('lbs') != -1 or  weight.find('Lbs') or weight.find('pound'):
+            if len(re.findall('\d*\.?\d+', weight)) > 1 :
+                weight = str(float(re.findall('\d*\.?\d+', weight)[1]) * 0.453592)
+            else :
+                weight = str(float(re.findall('\d*\.?\d+', weight)[0]) * 0.453592)
+        elif weight.find('kg') != -1 :
+            if len(re.findall('\d*\.?\d+', weight)) > 1:
+                weight = str(float(re.findall('\d*\.?\d+', weight)[1]))
+            else :
+                weight = re.findall('\d*\.?\d+', weight)[0]
+        elif weight.find('g') != -1 :
+            if len(re.findall('\d*\.?\d+', weight)) > 1:
+                weight = str(float(re.findall('\d*\.?\d+', weight)[1]) * 0.001)
+            else :
+                weight = str(float(re.findall('\d*\.?\d+', weight)[0]) * 0.001)
+        elif weight.find('ton') != -1 :
+            if len(re.findall('\d*\.?\d+', weight)) > 1:
+                weight = str(float(re.findall('\d*\.?\d+', weight)[1]) * 1000)
+            else :
+                weight = str(float(re.findall('\d*\.?\d+', weight)[0]) * 1000)
+        elif weight.find('oz') != -1 or weight.find('ounce') :
+            if len(re.findall('\d*\.?\d+', weight)) > 1:
+                weight = str(float(re.findall('\d*\.?\d+', weight)[1]) * 0.0283495)
+            else :
+                weight = str(float(re.findall('\d*\.?\d+', weight)[0]) * 0.0283495)
+        mammal['weight']= weight
+    else :
+        mammals.remove(mammal)
+        continue
+
+
+# weight casting - avg
+    weight = mammal['weight']
+    weight = weight.replace(',', '')
+    weight = weight.replace(' ', '')
+    flag = False
+    for char in weight :
+        if char.isdigit() :
+            flag = True
+    if flag :
+        if weight.find('(') != -1 :
+            weight = weight[0:weight.index('(')]
+        if weight.find('lbs') != -1 or  weight.find('Lbs') or weight.find('pound'):
+            if len(re.findall('\d*\.?\d+', weight)) > 1 :
+                weight = str((float(re.findall('\d*\.?\d+', weight)[1]) * 0.453592 + float(re.findall('\d*\.?\d+', weight)[0]) * 0.453592) / 2)
+            else :
+                weight = str(float(re.findall('\d*\.?\d+', weight)[0]) * 0.453592)
+        elif weight.find('kg') != -1 :
+            if len(re.findall('\d*\.?\d+', weight)) > 1:
+                weight = str((float(re.findall('\d*\.?\d+', weight)[1]) + float(re.findall('\d*\.?\d+', weight)[0])) / 2)
+            else :
+                weight = re.findall('\d*\.?\d+', weight)[0]
+        elif weight.find('g') != -1 :
+            if len(re.findall('\d*\.?\d+', weight)) > 1:
+                weight = str((float(re.findall('\d*\.?\d+', weight)[1]) * 0.001 + float(re.findall('\d*\.?\d+', weight)[0]) * 0.001) / 2)
+            else :
+                weight = str(float(re.findall('\d*\.?\d+', weight)[0]) * 0.001)
+        elif weight.find('ton') != -1 :
+            if len(re.findall('\d*\.?\d+', weight)) > 1:
+                weight = str((float(re.findall('\d*\.?\d+', weight)[1]) * 1000 + float(re.findall('\d*\.?\d+', weight)[0]) * 1000) / 2)
+            else :
+                weight = str(float(re.findall('\d*\.?\d+', weight)[0]) * 1000)
+        elif weight.find('oz') != -1 or weight.find('ounce') :
+            if len(re.findall('\d*\.?\d+', weight)) > 1:
+                weight = str((float(re.findall('\d*\.?\d+', weight)[1]) * 0.0283495 + float(re.findall('\d*\.?\d+', weight)[0]) * 0.0283495) / 2)
+            else :
+                weight = str(float(re.findall('\d*\.?\d+', weight)[0]) * 0.0283495)
+        mammal['weight']= weight
+    else :
+        mammals.remove(mammal)
+        continue
